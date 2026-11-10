@@ -32,7 +32,7 @@ export function escolhaPrioridade() {
 
 
 
-export function cadastrarTarefa() {
+export function cadastrarTarefas() {
     const nome = perguntarTexto("titulo da tarefa: ")
     const descricao = perguntarTexto("descricao da tarefa: ")
     const responsavel = perguntarTexto("responsavel pela tarefa: ")
@@ -41,7 +41,7 @@ export function cadastrarTarefa() {
     if (!nome.trim()) {
         console.log("titulo não pode estar vazio");
         return
-        
+
     }
 
     if (!descricao.trim()) {
@@ -54,23 +54,23 @@ export function cadastrarTarefa() {
         return
     }
 
-    const tarefa =  {
+    const tarefa = {
         id: tarefas.length + 1,
         titulo: nome,
         descricao: descricao,
         responsavel: responsavel,
         prioridade: prioridade,
-        status: "pendente"
+        status: "Pendente"
     }
 
     tarefas.push(tarefa)
-    
+
 
 
 }
 
 
-export function listarTarefa() {
+export function listarTarefas() {
 
     if (tarefas.length === 0) {
         console.log("não existem tarefas cadastradas");
@@ -84,20 +84,30 @@ export function listarTarefa() {
         console.log("responsavel:", tarefa.responsavel);
         console.log("prioridade:", tarefa.prioridade);
         console.log("status:", tarefa.status);
-    })}
+    })
+}
 
-export function buscarTarefaPorId(id) {
+export function buscarTarefa(id) {
+
     const tarefaEncontrada = tarefas.find((tarefa) => tarefa.id === id);
 
     if (!tarefaEncontrada) {
         return null;
     }
 
+    console.log(`\nid: ${tarefaEncontrada.id}`);
+    console.log(`título: ${tarefaEncontrada.titulo}`);
+    console.log(`descrição: ${tarefaEncontrada.descricao}`);
+    console.log(`responsável: ${tarefaEncontrada.responsavel}`);
+    console.log(`prioridade: ${tarefaEncontrada.prioridade}`);
+    console.log(`status: ${tarefaEncontrada.status}\n`);
+
     return tarefaEncontrada;
 }
 
 export function atualizarStatus(id) {
-    const tarefa = buscarTarefaPorId(id);
+
+    const tarefa = buscarTarefa(id);
 
     if (!tarefa) {
         console.log("tarefa não encontrada");
@@ -108,7 +118,7 @@ export function atualizarStatus(id) {
     console.log("2 - Em andamento");
     console.log("3 - Concluída");
 
-    const opcao = perguntarNumero("Escolha o novo status: ");
+    const opcao = perguntarNumero("digite o numero correspondente ao novo status: ");
     let novoStatus;
 
     if (opcao === 1) {
@@ -126,6 +136,26 @@ export function atualizarStatus(id) {
     console.log("status da tarefa atualizado");
 }
 
+export function listarTarefasPorStatus(status) {
+
+    const tarefasEncontradas = tarefas.filter(
+        tarefa => tarefa.status.trim().toLowerCase() === status.trim().toLowerCase()
+    );
+
+    if (tarefasEncontradas.length === 0) {
+        console.log("não existem tarefas com esse status");
+        return;
+    }
+
+    tarefasEncontradas.forEach((tarefa) => {
+        console.log("id:", tarefa.id);
+        console.log("titulo:", tarefa.titulo);
+        console.log("descricao:", tarefa.descricao);
+        console.log("responsavel:", tarefa.responsavel);
+        console.log("prioridade:", tarefa.prioridade);
+        console.log("status:", tarefa.status);
+    });
+}
 
 
 
@@ -137,34 +167,4 @@ export function atualizarStatus(id) {
 
 
 
-// export const tarefas = [];
 
-
-//    const tarefas = [ 
-//     { 
-//         id: 1, 
-//         titulo: "Criar tela de login", 
-//         descricao: "Desenvolver a interface de acesso", 
-//         responsavel: "Carlos", 
-//         prioridade: "Alta", 
-//         status: "Pendente" 
-//     }, 
-//     { 
-//         id: 2, 
-//         titulo: "Criar banco de dados", 
-//         descricao: "Modelar as tabelas do sistema", 
-//         responsavel: "Mariana", 
-//         prioridade: "Média", 
-//         status: "Em andamento" 
-//     }, 
-//     { 
-//         id: 3, 
-//         titulo: "Documentar o projeto", 
-//         descricao: "Criar documentação das funcionalidades", 
-//         responsavel: "Pedro", 
-//         prioridade: "Baixa", 
-//         status: "" 
-//     } 
-// ];
- 
-    

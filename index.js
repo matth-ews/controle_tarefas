@@ -1,6 +1,6 @@
 import { perguntarTexto, perguntarNumero } from "./entrada.js"
 import { relatorioGeral, relatorioPrioridades } from "./relatorios.js"
-import { cadastrarTarefa, listarTarefa, buscarTarefa, atualizarStatus } from "./tarefas.js"
+import { relatorioGeral, relatorioPrioridades, relatorioResponsaveis } from "./relatorios.js"
 
 
 
@@ -19,55 +19,67 @@ while (true) {
     const opcao = perguntarNumero("escolha uma opcao: ")
 
     if (opcao === 0) {
-        console.log("encerando");
+        console.log("encerrando");
         break
-        
+
     }
 
 
     switch (opcao) {
 
         case 1:
-        cadastrarTarefa()
+            console.clear()
+            cadastrarTarefas()
+            break
 
         case 2:
-        listarTarefa()
-        break
+            console.clear()
+            listarTarefas()
+            break
 
-        case 3:
-        buscarTarefa()
-        break
+        case 3: {
+            console.clear()
+            let id = perguntarNumero("digite o id da tarefa que sera procurada: ")
+            buscarTarefa(id)
+            break
+        }
 
-        case 4:
-        atualizarStatus()
-        break
+        case 4: {
+            console.clear()
+            let id = perguntarNumero("digite o id da tarefa: ")
+            atualizarStatus(id)
+            break
+        }
 
         case 5:
-        console.log("\nStatus disponíveis: Pendente - Em andamento - Concluída");
-        const statusFiltro = perguntarTexto("Digite o status que deseja filtrar: ");
-        listarTarefasPorStatus(statusFiltro);
-        break;
+            console.clear()
+            const statusFiltro = perguntarTexto("Digite o status que deseja filtrar: ");
+            listarTarefasPorStatus(statusFiltro);
+            break;
 
         case 6:
-        relatorioGeral()
-        break
+            console.clear()
+            relatorioGeral()
+            break
 
         case 7:
-        relatorioPrioridades()
-        break
+            console.clear()
+            relatorioPrioridades()
+            break
 
         case 8:
-        relatorioResponsaveis()
-        break
+            console.clear()
+            relatorioResponsaveis()
+            break
 
 
         default:
-        console.log("Opção Inválida")
+            console.log("opcao invalida")
 
-        
-            
+
+
     }
 
 
-    
+
 }
